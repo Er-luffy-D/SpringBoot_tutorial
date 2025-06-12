@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Collections;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,9 @@ public class StudentCont {
 
     @GetMapping("/")
     public String getAllStudents(Model model) {
-        model.addAttribute("students", service.getAllStudents());
+        List<Student> s = service.getAllStudents();
+        Collections.sort(s);
+        model.addAttribute("students", s);
         model.addAttribute("student", new Student()); // to handle form
         return "index";
     }
